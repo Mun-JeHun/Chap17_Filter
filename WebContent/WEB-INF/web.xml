@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Chap17_Filter</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+ 
+ <!--  
+  <filter>				 필터태그는 필터를 등록하고 동시에 필터클래스를 지정해야 함  
+  	<filter-name>loggingFilter</filter-name>
+  	<filter-class>kr.gov.filter01.LoggingFilter</filter-class> 
+  </filter>
+  <filter-mapping>
+  	<filter-name>loggingFilter</filter-name>
+  	<url-pattern>*.jsp</url-pattern>	*.jsp : 모든 jsp파일을 실행하면 필터 작동!
+  </filter-mapping>
+   -->
+   
+   <!-- 여러개의 필터태그를 이용하여 해당 클래스로 필터를 지정하게 되면,
+   		모든 필터클래스의 인스턴스가 다 생성되고 init()을 호출하게 된다. -->
+   <filter>
+   	<filter-name>Filter01</filter-name>
+   	<filter-class>kr.gov.filter02.AuthenFilter</filter-class>
+   </filter>
+   <filter-mapping>			<!--위에 등록한 필터 사용범위를 지정하는 것  -->
+   	<filter-name>Filter01</filter-name>
+   	<url-pattern>/filter01_process.jsp</url-pattern>		<!-- 반드시 경로지정자 / 를 넣도록 함 -->
+   </filter-mapping>
+  
+  <filter>
+  	<filter-name>Filter02</filter-name>
+  	<filter-class>kr.gov.filter03.InitParamFilter</filter-class>
+  	<init-param>
+  		<param-name>param1</param-name>
+  		<param-value>admin</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>param2</param-name>
+  		<param-value>0217</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>Filter02</filter-name>
+  	<url-pattern>/filter02_process.jsp</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>Filter03</filter-name>
+  	<filter-class>kr.gov.filter04.LogFileFilter</filter-class>
+  	<init-param>
+  		<param-name>filename</param-name>
+  		<param-value>C:\\workspace - jsp\\log\\monitor.log</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>Filter03</filter-name>
+  	<url-pattern>/filter02_process.jsp</url-pattern>
+  </filter-mapping>
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
